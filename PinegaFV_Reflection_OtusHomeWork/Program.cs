@@ -95,8 +95,8 @@ namespace PinegaFV_Reflection_OtusHomeWork
         {
             return new F
             {
-                i1 = new Fn.RandomInt(10, 1000).value,
-                i2 = Fn.GetRndInt(10, 1000),
+                i1 = new Fn.RandomInt(10, 1000).value, 
+                i2 = new Fn.RandomInt(10, 1000).value,  //Fn.GetRndInt(10, 1000),
                 i3 = Fn.GetRndInt(10, 1000),
                 i4 = Fn.GetRndInt(10, 1000),
                 i5 = Fn.GetRndInt(10, 1000)
