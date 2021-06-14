@@ -137,24 +137,17 @@ namespace PinegaFV_Reflection_OtusHomeWork
             StringBuilder stringBuilder = new StringBuilder();
 
             //сначала заголовки
-            object x = source[0];
-
-            List<ObjectParameter> params01 = GetObjectParameters(x);
-
-            List<string> paramNames = GetObjectParameters(x).Select(y => y.name).ToList();
-
+            List<string> paramNames = GetObjectParameters(source[0]).Select(y => y.name).ToList();
             s=string.Join(StrSeparator, paramNames);
-
             stringBuilder.Append(s);
             stringBuilder.Append(Fn.Chr13);
 
-
             //далее сами объекты
-            foreach (object x0 in source)
+            foreach (object seralizabeObject in source)
             {
                 stringBuilder.Append(
                     string.Join(StrSeparator,
-                                GetObjectParameters(x0)
+                                GetObjectParameters(seralizabeObject)
                                     .Select(y => y.value)
                                     .ToList()));
                 stringBuilder.Append(Fn.Chr13);

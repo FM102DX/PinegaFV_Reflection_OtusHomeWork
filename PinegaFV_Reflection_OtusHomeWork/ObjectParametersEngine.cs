@@ -22,7 +22,7 @@ namespace PinegaFV_Reflection_OtusHomeWork
             foreach (FieldInfo f0 in newObjectFields)
             {
 
-                if (f0.Name.ToLower() == name.ToLower())
+                if (f0.Name.ToUpperInvariant() == name.ToUpperInvariant())
                 {
                     try
                     {
@@ -38,7 +38,7 @@ namespace PinegaFV_Reflection_OtusHomeWork
 
             foreach (PropertyInfo f1 in newObjectProperties)
             {
-                if (f1.Name.ToLower() == name.ToLower())
+                if (f1.Name.ToUpperInvariant() == name.ToUpperInvariant())
                 {
                     if (IsItOnlyGetter(x, name)) return;
                     try
@@ -64,7 +64,7 @@ namespace PinegaFV_Reflection_OtusHomeWork
             foreach (FieldInfo f0 in newObjectFields)
             {
 
-                if (f0.Name.ToLower() == name.ToLower())
+                if (f0.Name.ToUpperInvariant() == name.ToUpperInvariant())
                 {
                     op.value = f0.GetValue(x);
                     return op;
@@ -73,7 +73,7 @@ namespace PinegaFV_Reflection_OtusHomeWork
 
             foreach (PropertyInfo f1 in newObjectProperties)
             {
-                if (f1.Name.ToLower() == name.ToLower())
+                if (f1.Name.ToUpperInvariant() == name.ToUpperInvariant())
                 {
                     op.value = f1.GetValue(x);
                     return op;
@@ -124,7 +124,7 @@ namespace PinegaFV_Reflection_OtusHomeWork
 
             foreach (PropertyInfo f1 in newObjectProperties)
             {
-                if (f1.Name.ToLower() == fieldName.ToLower())
+                if (f1.Name.ToUpperInvariant() == fieldName.ToUpperInvariant())
                 {
                     //вот он нашел это поле
                     return (f1.CanRead && (!f1.CanWrite));
@@ -143,37 +143,42 @@ namespace PinegaFV_Reflection_OtusHomeWork
             if (value.GetType().ToString() == typeStr) { return value; }
 
             object rez = null;
+
+            string _typeVar="";
+
+            if (typeStr == typeof(System.String).FullName) _typeVar = "String";
+            if (typeStr == typeof(System.Decimal).FullName || typeStr == typeof(System.Double).FullName) _typeVar = "DoubleDecimal";
+            if (typeStr == typeof(System.Int16).FullName || typeStr == typeof(System.Int32).FullName) _typeVar = "Int";
+            if (typeStr == typeof(System.Boolean).FullName) _typeVar = "Boolean";
+            if (typeStr == typeof(System.DateTime).FullName) _typeVar = "DateTime";
+
             try
             {
-                switch (typeStr)
+                switch (_typeVar)
                 {
-                    case "System.String":
+                    case "String":
                         rez = Convert.ToString(value);
                         break;
 
-                    case "System.Decimal":
-                    case "System.Double":
+                    case "DoubleDecimal":
                         rez = Convert.ToDouble(value);
                         break;
 
-                    case "System.Int32":
-                    case "System.Int16":
-                    case "System.Int":
+                    case "Int":
                         rez = Convert.ToInt32(value);
                         break;
 
-                    case "System.Boolean":
+                    case "Boolean":
                         rez = Convert.ToBoolean(value);
                         break;
 
-                    case "System.DateTime":
+                    case "DateTime":
                         rez = Convert.ToDateTime(value);
                         break;
 
                     default:
                         rez = value;
                         break;
-                        
                 }
             }
             catch
