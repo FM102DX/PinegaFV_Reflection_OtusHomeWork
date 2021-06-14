@@ -95,7 +95,7 @@ namespace PinegaFV_Reflection_OtusHomeWork
         {
             return new F
             {
-                i1 = Fn.GetRndInt(10, 1000),
+                i1 = new Fn.RandomInt(10, 1000).value,
                 i2 = Fn.GetRndInt(10, 1000),
                 i3 = Fn.GetRndInt(10, 1000),
                 i4 = Fn.GetRndInt(10, 1000),
@@ -191,6 +191,15 @@ namespace PinegaFV_Reflection_OtusHomeWork
             d = Math.Round(d, digits);
 
             return d;
+        }
+        public class RandomInt
+        {
+            public int value{get; private set;}
+            public RandomInt(int min, int max)
+            {
+                value = random.Next(min, max);
+            }
+
         }
 
         public static int GetRndInt(int min, int max)
